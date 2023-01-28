@@ -62,4 +62,16 @@ public class Player : MonoBehaviour
         bullet.Project(transform.up);
     }
 
+    //Handle Player getting hit
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Asteroid")
+        {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = 0.0f;
+
+            this.gameObject.SetActive(false);
+        }
+    }
+
 }
