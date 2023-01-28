@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Bullet BulletPrefab;
+
     public float ThrustSpeed = 1.0f;
     public float TurnSpeed = 1.0f;
 
@@ -31,6 +33,13 @@ public class Player : MonoBehaviour
         {
             turnDirection = 0.0f;
         }
+
+        //Holding down key does not shoot multiple times
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            Shoot();
+        }
+
     }
 
     private void FixedUpdate()
@@ -45,6 +54,12 @@ public class Player : MonoBehaviour
             rigidbody.AddTorque(turnDirection * TurnSpeed);
         }
 
+    }
+
+    private void Shoot()
+    {
+        Bullet bullet = Instantiate(this.BulletPrefab, this.transform.position, this.transform.rotation);
+        bullet.Project(transform.up);
     }
 
 }
