@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     }
 
     //Handle Player getting hit
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Asteroid")
         {
