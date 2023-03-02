@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Bullet BulletPrefab;
-
-    public float ThrustSpeed = 1.0f;
-    public float TurnSpeed = 1.0f;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private float thrustSpeed = 1.0f;
+    [SerializeField] private float turnSpeed = 1.0f;
 
     private bool thrusting;
     private float turnDirection;
@@ -35,7 +34,7 @@ public class Player : MonoBehaviour
         }
 
         //Holding down key does not shoot multiple times
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             Shoot();
         }
@@ -46,19 +45,19 @@ public class Player : MonoBehaviour
     {
         if(thrusting)
         {
-            rigidbody.AddForce(this.transform.up * this.ThrustSpeed);
+            rigidbody.AddForce(this.transform.up * this.thrustSpeed);
         }
 
         if(turnDirection != 0.0f)
         {
-            rigidbody.AddTorque(turnDirection * TurnSpeed);
+            rigidbody.AddTorque(turnDirection * turnSpeed);
         }
 
     }
 
     private void Shoot()
     {
-        Bullet bullet = Instantiate(this.BulletPrefab, this.transform.position, this.transform.rotation);
+        Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
         bullet.Project(transform.up);
     }
 

@@ -49,7 +49,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        this.Lives = 3;
+        this.Score = 0;
 
+        Invoke(nameof(Respawn), this.RespawnTime);
     }
 
 }
